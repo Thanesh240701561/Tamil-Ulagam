@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Kumari - Ocean Sunrise Tourism</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 1️⃣ Header Section -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <img src="./src/assets/logo.png" alt="Tamil Ulagam Logo" class="main-logo"
+                        onerror="this.src='https://via.placeholder.com/40?text=Logo'">
+                </div>
+                <h1 class="brand-name">Discover Kumari</h1>
+            </div>
+            <div class="header-right">
+                <a href="#" class="map-link-btn" aria-label="Open Map">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+                        <path d="M15 5.764v15" />
+                        <path d="M9 3.236v15" />
+                    </svg>
+                </a>
+                <button id="profileBtn" class="profile-btn" aria-label="User Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- 2️⃣ Search Section -->
+        <section class="search-section">
+            <div class="search-bar-container">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+                <input type="text" placeholder="Search destinations or activities" class="search-input">
+            </div>
+        </section>
+
+        <!-- 3️⃣ Navigation Buttons -->
+        <nav class="action-nav">
+            <a href="#" class="nav-card">
+                <div class="icon-box transport-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h10" />
+                        <circle cx="7" cy="17" r="2" />
+                        <circle cx="17" cy="17" r="2" />
+                    </svg>
+                </div>
+                <span>Transport</span>
+            </a>
+            <a href="#" class="nav-card">
+                <div class="icon-box stay-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" />
+                        <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" />
+                        <path d="M12 4v6" />
+                        <path d="M2 18h20" />
+                    </svg>
+                </div>
+                <span>Stay</span>
+            </a>
+            <a href="#" class="nav-card">
+                <div class="icon-box itinerary-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                        <line x1="16" x2="16" y1="2" y2="6" />
+                        <line x1="8" x2="8" y1="2" y2="6" />
+                        <line x1="3" x2="21" y1="10" y2="10" />
+                        <path d="M8 14h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M8 18h.01" />
+                        <path d="M12 18h.01" />
+                        <path d="M16 18h.01" />
+                    </svg>
+                </div>
+                <span>Itinerary</span>
+            </a>
+        </nav>
+
+
+
+        <!-- 4.5️⃣ Popular Cities Section -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Popular Cities</h2>
+                <a href="cities.html" class="view-all-btn">View All ></a>
+            </div>
+            <div class="cities-grid">
+                <!-- Chennai -->
+                <div class="city-card-wide">
+                    <div class="city-main-info">
+                        <a href="explore.html?city=chennai" class="city-text">
+                            <h3>Chennai</h3>
+                            <p>Gateway to South India</p>
+                        </a>
+                        <a href="explore.html?city=chennai" class="city-view-btn">View All</a>
+                    </div>
+                    <div class="famous-places-list">
+                        <a href="explore.html?city=chennai&cat=beaches" class="place-tag">Beaches</a>
+                        <a href="explore.html?city=chennai&cat=temples" class="place-tag">Temples</a>
+                        <a href="explore.html?city=chennai&cat=museums" class="place-tag">Museums</a>
+                        <a href="explore.html?city=chennai&cat=forts" class="place-tag">Forts</a>
+                    </div>
+                </div>
+
+                <!-- Ooty -->
+                <div class="city-card-wide">
+                    <div class="city-main-info">
+                        <a href="explore.html?city=ooty" class="city-text">
+                            <h3>Ooty</h3>
+                            <p>Queen of Hill Stations</p>
+                        </a>
+                        <a href="explore.html?city=ooty" class="city-view-btn">View All</a>
+                    </div>
+                    <div class="famous-places-list">
+                        <a href="explore.html?city=ooty&cat=lakes" class="place-tag">Lakes</a>
+                        <a href="explore.html?city=ooty&cat=forests" class="place-tag">Forests</a>
+                        <a href="explore.html?city=ooty&cat=mountains" class="place-tag">Mountains</a>
+                        <a href="explore.html?city=ooty&cat=museums" class="place-tag">Museums</a>
+                    </div>
+                </div>
+
+                <!-- Coimbatore -->
+                <div class="city-card-wide">
+                    <div class="city-main-info">
+                        <a href="explore.html?city=coimbatore" class="city-text">
+                            <h3>Coimbatore</h3>
+                            <p>Manchester of South India</p>
+                        </a>
+                        <a href="explore.html?city=coimbatore" class="city-view-btn">View All</a>
+                    </div>
+                    <div class="famous-places-list">
+                        <a href="explore.html?city=coimbatore&cat=temples" class="place-tag">Temples</a>
+                        <a href="explore.html?city=coimbatore&cat=statues" class="place-tag">Statues</a>
+                        <a href="explore.html?city=coimbatore&cat=waterfalls" class="place-tag">Waterfalls</a>
+                        <a href="explore.html?city=coimbatore&cat=museums" class="place-tag">Museums</a>
+                    </div>
+                </div>
+
+                <!-- Erode -->
+                <div class="city-card-wide">
+                    <div class="city-main-info">
+                        <a href="explore.html?city=erode" class="city-text">
+                            <h3>Erode</h3>
+                            <p>The Turmeric City</p>
+                        </a>
+                        <a href="explore.html?city=erode" class="city-view-btn">View All</a>
+                    </div>
+                    <div class="famous-places-list">
+                        <a href="explore.html?city=erode&cat=rivers" class="place-tag">Rivers</a>
+                        <a href="explore.html?city=erode&cat=temples" class="place-tag">Temples</a>
+                        <a href="explore.html?city=erode&cat=waterfalls" class="place-tag">Waterfalls</a>
+                        <a href="explore.html?city=erode&cat=forts" class="place-tag">Forts</a>
+                    </div>
+                </div>
+
+                <!-- Madurai -->
+                <div class="city-card-wide">
+                    <div class="city-main-info">
+                        <a href="explore.html?city=madurai" class="city-text">
+                            <h3>Madurai</h3>
+                            <p>The City of Temples</p>
+                        </a>
+                        <a href="explore.html?city=madurai" class="city-view-btn">View All</a>
+                    </div>
+                    <div class="famous-places-list">
+                        <a href="explore.html?city=madurai&cat=temples" class="place-tag">Temples</a>
+                        <a href="explore.html?city=madurai&cat=palaces" class="place-tag">Palaces</a>
+                        <a href="explore.html?city=madurai&cat=museums" class="place-tag">Museums</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5️⃣ Featured Destinations Section -->
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Featured Destinations</h2>
+                <a href="explore.html" class="view-all-btn">View All ></a>
+            </div>
+            <div class="scroll-container horizontal-scroll no-scrollbar">
+                <a href="details.html?id=kk1" class="dest-card">
+                    <div class="dest-img-box"
+                        style="background-image: url('https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=400&q=80')">
+                    </div>
+                    <div class="dest-info">
+                        <h3>Beach View</h3>
+                        <p>Kanyakumari</p>
+                        <div class="rating">⭐⭐⭐⭐⭐ 5.0</div>
+                    </div>
+                </a>
+                <a href="details.html?id=kk2" class="dest-card">
+                    <div class="dest-img-box"
+                        style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=400&q=80')">
+                    </div>
+                    <div class="dest-info">
+                        <h3>Hidden Falls</h3>
+                        <p>Kanyakumari</p>
+                        <div class="rating">⭐⭐⭐⭐⭐ 4.9</div>
+                    </div>
+                </a>
+                <a href="details.html?id=kk3" class="dest-card">
+                    <div class="dest-info-card"
+                        style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80')">
+                        <div class="dest-card-overlay">
+                            <h3>Sunset Temple</h3>
+                            <p>Kanyakumari</p>
+                            <div class="rating">⭐⭐⭐⭐⭐ 5.0</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <footer class="bottom-spacer"></footer>
+    </div>
+    <script src="destinationsData.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

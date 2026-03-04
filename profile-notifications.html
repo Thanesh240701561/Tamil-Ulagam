@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Discover Kumari</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .profile-page-header {
+            background: linear-gradient(180deg, #fff3e0 0%, rgba(255, 255, 255, 0) 100%);
+            padding: 40px 20px 20px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 0px;
+            top: 45px;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .notification-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .notification-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .notification-card.unread {
+            border-left: 4px solid #1e88e5;
+            background: #fdfdfd;
+        }
+
+        .notif-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e3f2fd;
+            color: #1e88e5;
+            flex-shrink: 0;
+        }
+
+        .notif-icon.offer {
+            background: #fff8e1;
+            color: #ffb300;
+        }
+
+        .notif-icon.system {
+            background: #e8f5e9;
+            color: #43a047;
+        }
+
+        .notif-content {
+            flex: 1;
+        }
+
+        .notif-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .notif-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .notif-time {
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .clear-all-btn {
+            display: block;
+            margin: 0 auto 30px;
+            background: none;
+            color: #1e88e5;
+            border: 1px solid #1e88e5;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clear-all-btn:hover {
+            background: #e3f2fd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="profile-page-header">
+            <a href="home.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </a>
+            <h2 style="font-size: 24px; margin-top: 5px;">Notifications</h2>
+        </header>
+
+        <main class="content-section">
+            <button class="clear-all-btn">Mark All as Read</button>
+
+            <div class="notification-container">
+                <div class="notification-card unread">
+                    <div class="notif-icon offer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <h4 class="notif-title">New Special Offer for You!</h4>
+                        <p class="notif-desc">Get 20% off on premium stays in Ooty this weekend. Use code OOTY20 at
+                            checkout.</p>
+                        <span class="notif-time">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            2 hours ago
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification-card unread">
+                    <div class="notif-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <h4 class="notif-title">Travel Advisory Updated</h4>
+                        <p class="notif-desc">Important weather update for coastal areas near Kanyakumari. Please review
+                            before planning a trip.</p>
+                        <span class="notif-time">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Yesterday, 4:30 PM
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification-card">
+                    <div class="notif-icon system">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <h4 class="notif-title">Profile Successfully Verified</h4>
+                        <p class="notif-desc">Your identity verification has been completed. You're now a verified
+                            Discover Kumari explorer.</p>
+                        <span class="notif-time">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Oct 22, 2025
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.querySelector('.clear-all-btn').addEventListener('click', function () {
+            document.querySelectorAll('.notification-card').forEach(card => {
+                card.classList.remove('unread');
+            });
+            this.textContent = 'All Caught Up!';
+            this.style.pointerEvents = 'none';
+        });
+    </script>
+</body>
+
+</html>
