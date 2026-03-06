@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <div class="user-details">
                                     <h2>User Explorer</h2>
-                                    <p>user@discoverkumari.com</p>
+                                    <p>user@tamilulagam.com</p>
                                 </div>
                             </div>
                             <button class="close-profile" id="closeProfileBtn">&times;</button>
