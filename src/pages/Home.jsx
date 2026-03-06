@@ -10,7 +10,7 @@ const Home = ({ onProfileClick, onExploreClick }) => {
                     <div className="logo-container">
                         <img src="/src/assets/logo.png" alt="Logo" onError={(e) => e.target.src = 'https://via.placeholder.com/40?text=DK'} />
                     </div>
-                    <h1 className="brand-name">Discover Kumari</h1>
+                    <h1 className="brand-name">Tamil Ulagam</h1>
                 </div>
                 <div className="header-right">
                     <button className="map-link-btn">
