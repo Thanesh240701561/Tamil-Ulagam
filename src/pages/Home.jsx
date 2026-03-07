@@ -1,23 +1,65 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
 
 const Home = () => {
     const navigate = useNavigate();
 
-    const cities = [
-        { name: 'Chennai', desc: 'Gateway to South India', slug: 'chennai', cats: ['Beaches', 'Temples', 'Museums', 'Forts'] },
-        { name: 'Ooty', desc: 'Queen of Hill Stations', slug: 'ooty', cats: ['Lakes', 'Forests', 'Mountains', 'Museums'] },
-        { name: 'Coimbatore', desc: 'Manchester of South India', slug: 'coimbatore', cats: ['Temples', 'Statues', 'Waterfalls', 'Museums'] },
-        { name: 'Erode', desc: 'The Turmeric City', slug: 'erode', cats: ['Rivers', 'Temples', 'Waterfalls', 'Forts'] },
-        { name: 'Madurai', desc: 'The City of Temples', slug: 'madurai', cats: ['Temples', 'Palaces', 'Museums'] },
-    ];
+    const destinationsData = window.destinationsData || [];
 
-    const featured = [
-        { id: 'kk1', name: 'Beach View', city: 'Kanyakumari', rating: '5.0', image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=400&q=80' },
-        { id: 'kk2', name: 'Hidden Falls', city: 'Kanyakumari', rating: '4.9', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=400&q=80' },
-        { id: 'kk3', name: 'Sunset Temple', city: 'Kanyakumari', rating: '5.0', image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=400&q=80' },
-    ];
+    const allCitiesData = useMemo(() => {
+        const cityMap = new Map();
+
+        destinationsData.forEach(dest => {
+            const cityName = dest.city;
+            if (!cityMap.has(cityName)) {
+                cityMap.set(cityName, {
+                    name: cityName,
+                    slug: cityName.toLowerCase().replace(/\s+/g, '-'),
+                    cats: new Set(),
+                    count: 0
+                });
+            }
+            const cityData = cityMap.get(cityName);
+            cityData.count += 1;
+            if (dest.category) {
+                cityData.cats.add(dest.category.charAt(0).toUpperCase() + dest.category.slice(1));
+            }
+        });
+
+        const cityDescriptions = {
+            'Chennai': 'Gateway to South India',
+            'Madurai': 'The Ancient City of Temples',
+            'Coimbatore': 'Manchester of South India',
+            'Tirunelveli': 'The Halwa City of South India',
+            'Nilgiris': 'The Enchanting Blue Mountains',
+            'Dindigul': 'The City of Locks and Biryani',
+            'Kanyakumari': 'The Land\'s End of India',
+            'Thanjavur': 'The Rice Bowl of Tamil Nadu',
+            'Trichy': 'The Historic Rockfort City',
+            'Tiruchirappalli': 'The Historic Rockfort City',
+            'Salem': 'The Steel and Mango City',
+            'Erode': 'The Turmeric City of India',
+            'Chengalpattu': 'Gateway to Coastal Heritage',
+            'Rameswaram': 'Island of Divine Peace',
+            'Ooty': 'Queen of Hill Stations',
+            'Kodaikanal': 'Princess of Hill Stations'
+        };
+
+        return Array.from(cityMap.values()).map(city => ({
+            ...city,
+            desc: cityDescriptions[city.name] || `${city.name} - ${city.count} Destinations`,
+            cats: Array.from(city.cats).slice(0, 4)
+        })).sort((a, b) => b.count - a.count);
+    }, [destinationsData]);
+
+    const cities = useMemo(() => allCitiesData.slice(0, 6), [allCitiesData]);
+
+    const featured = useMemo(() => {
+        return [...destinationsData]
+            .sort((a, b) => parseFloat(b.rating || 0) - parseFloat(a.rating || 0))
+            .slice(0, 5);
+    }, [destinationsData]);
 
     const handleCityCardClick = (slug) => {
         navigate(`/explore.html?city=${slug}`);

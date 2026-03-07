@@ -8,14 +8,53 @@ const Cities = () => {
 
     const destinationsData = window.destinationsData || [];
 
-    const cities = [
-        { name: 'Chennai', desc: 'Gateway to South India', slug: 'chennai', cats: ['Beaches', 'Temples', 'Museums', 'Forts'] },
-        { name: 'Ooty', desc: 'Queen of Hill Stations', slug: 'ooty', cats: ['Lakes', 'Forests', 'Mountains', 'Museums'] },
-        { name: 'Coimbatore', desc: 'Manchester of South India', slug: 'coimbatore', cats: ['Temples', 'Statues', 'Waterfalls', 'Museums'] },
-        { name: 'Erode', desc: 'The Turmeric City', slug: 'erode', cats: ['Rivers', 'Temples', 'Waterfalls', 'Forts'] },
-        { name: 'Madurai', desc: 'The City of Temples', slug: 'madurai', cats: ['Temples', 'Palaces', 'Museums'] },
-        { name: 'Kanyakumari', desc: 'Land\'s End of India', slug: 'kanyakumari', cats: ['Islands', 'Beaches', 'Waterfalls', 'Temples'] },
-    ];
+    const allCitiesData = useMemo(() => {
+        const cityMap = new Map();
+
+        destinationsData.forEach(dest => {
+            const cityName = dest.city;
+            if (!cityMap.has(cityName)) {
+                cityMap.set(cityName, {
+                    name: cityName,
+                    slug: cityName.toLowerCase().replace(/\s+/g, '-'),
+                    cats: new Set(),
+                    count: 0
+                });
+            }
+            const cityData = cityMap.get(cityName);
+            cityData.count += 1;
+            if (dest.category) {
+                cityData.cats.add(dest.category.charAt(0).toUpperCase() + dest.category.slice(1));
+            }
+        });
+
+        const cityDescriptions = {
+            'Chennai': 'Gateway to South India',
+            'Madurai': 'The Ancient City of Temples',
+            'Coimbatore': 'Manchester of South India',
+            'Tirunelveli': 'The Halwa City of South India',
+            'Nilgiris': 'The Enchanting Blue Mountains',
+            'Dindigul': 'The City of Locks and Biryani',
+            'Kanyakumari': 'The Land\'s End of India',
+            'Thanjavur': 'The Rice Bowl of Tamil Nadu',
+            'Trichy': 'The Historic Rockfort City',
+            'Tiruchirappalli': 'The Historic Rockfort City',
+            'Salem': 'The Steel and Mango City',
+            'Erode': 'The Turmeric City of India',
+            'Chengalpattu': 'Gateway to Coastal Heritage',
+            'Rameswaram': 'Island of Divine Peace',
+            'Ooty': 'Queen of Hill Stations',
+            'Kodaikanal': 'Princess of Hill Stations'
+        };
+
+        return Array.from(cityMap.values()).map(city => ({
+            ...city,
+            desc: cityDescriptions[city.name] || `${city.name} - ${city.count} Destinations`,
+            cats: Array.from(city.cats).slice(0, 4)
+        })).sort((a, b) => b.count - a.count);
+    }, [destinationsData]);
+
+    const cities = allCitiesData;
 
     const allCategories = useMemo(() => {
         const cats = new Set();
