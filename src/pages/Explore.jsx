@@ -1,99 +1,177 @@
-import React, { useState } from 'react';
-import { Search, Camera, ArrowLeft, User } from 'lucide-react';
-import DestinationCard from '../components/DestinationCard';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import logoImg from '../assets/logo.png';
 
-const destinations = [
-    {
-        id: 1,
-        name: 'Kanyakumari Beach',
-        description: 'Beautiful seaside spot',
-        image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80',
-        rating: 5,
-        likes: 425
-    },
-    {
-        id: 2,
-        name: 'Kalikesam',
-        description: 'Serene forest area',
-        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
-        rating: 5,
-        likes: 203
-    },
-    {
-        id: 3,
-        name: 'Kodayar',
-        description: 'Scenic hill reservoir',
-        image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
-        rating: 5,
-        likes: 210
-    },
-    {
-        id: 4,
-        name: 'Kattabomman Memorial',
-        description: 'Historic freedom fighter site',
-        image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
-        rating: 5,
-        likes: 178
-    },
-    {
-        id: 5,
-        name: 'Kanalkesam',
-        description: 'Breathtaking viewpoints',
-        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
-        rating: 5,
-        likes: 156
-    }
-];
+const Explore = () => {
+    const [searchParams] = useSearchParams();
+    const cityFilter = searchParams.get('city');
+    const catFilter = searchParams.get('cat');
+    const qFilter = searchParams.get('q');
 
-function Explore({ onBack, onProfileClick }) {
-    const [searchTerm, setSearchTerm] = useState('Ka');
+    const [currentCat, setCurrentCat] = useState(catFilter ? catFilter.toLowerCase() : 'all');
+    const [searchTerm, setSearchTerm] = useState(qFilter || '');
 
-    const filteredDestinations = destinations.filter(dest =>
-        dest.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    useEffect(() => {
+        setCurrentCat(catFilter ? catFilter.toLowerCase() : 'all');
+        setSearchTerm(qFilter || '');
+    }, [catFilter, qFilter]);
+
+    const destinationsData = window.destinationsData || [];
+
+    const currentCity = cityFilter ? cityFilter.toLowerCase() : null;
+
+    const categories = useMemo(() => {
+        let pool = destinationsData;
+        if (currentCity) {
+            pool = destinationsData.filter(d => d.city.toLowerCase() === currentCity);
+        }
+        return ['all', ...new Set(pool.map(d => d.category.toLowerCase()))];
+    }, [currentCity, destinationsData]);
+
+    const filtered = useMemo(() => {
+        let result = destinationsData;
+
+        if (currentCity) {
+            result = result.filter(d => d.city.toLowerCase() === currentCity);
+        }
+        if (currentCat !== 'all') {
+            result = result.filter(d => d.category.toLowerCase() === currentCat);
+        }
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            result = result.filter(d =>
+                d.name.toLowerCase().includes(term) ||
+                d.city.toLowerCase().includes(term) ||
+                d.category.toLowerCase().includes(term) ||
+                d.description.toLowerCase().includes(term)
+            );
+        }
+        return result;
+    }, [currentCity, currentCat, searchTerm, destinationsData]);
+
+    const pageTitle = useMemo(() => {
+        if (searchTerm) return `Search results for "${searchTerm}"`;
+        if (currentCity && currentCat !== 'all') {
+            return `${currentCat.charAt(0).toUpperCase() + currentCat.slice(1)} in ${currentCity.charAt(0).toUpperCase() + currentCity.slice(1)}`;
+        }
+        if (currentCity) return `Famous Places in ${currentCity.charAt(0).toUpperCase() + currentCity.slice(1)}`;
+        if (currentCat !== 'all') return `${currentCat.charAt(0).toUpperCase() + currentCat.slice(1)} Destinations`;
+        return 'Explore All Destinations';
+    }, [currentCity, currentCat, searchTerm]);
 
     return (
-        <div className="app-container">
-            <header className="wave-container">
-                <svg className="wave-background" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#ffffff" fillOpacity="1" d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,122.7C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    <path fill="#e0f2f1" fillOpacity="0.5" d="M0,64L48,85.3C96,107,192,149,288,149.3C384,149,480,107,576,112C672,117,768,171,864,181.3C960,192,1056,160,1152,144C1248,128,1344,128,1392,128L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-                </svg>
-                <div className="header-content">
-                    <button className="back-button" onClick={onBack}>
-                        <ArrowLeft size={24} color="#555" />
-                    </button>
-                    <h1 className="page-title">Explore</h1>
-                    <button className="profile-btn-small" onClick={onProfileClick}>
-                        <User size={20} color="#555" />
-                    </button>
-                </div>
-            </header>
+        <>
+            <div className="app-container">
+                {/* Header */}
+                <header className="main-header">
+                    <div className="header-left">
+                        <Link to="/home.html" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="logo-container">
+                                <img src={logoImg} alt="Tamil Ulagam Logo" className="main-logo"
+                                    onError={(e) => { e.target.src = 'https://via.placeholder.com/40?text=Logo'; }} />
+                            </div>
+                            <h1 className="brand-name">Tamil Ulagam</h1>
+                        </Link>
+                    </div>
+                    <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <a href="#" className="map-link-btn" aria-label="Open Map">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+                                <path d="M15 5.764v15" />
+                                <path d="M9 3.236v15" />
+                            </svg>
+                        </a>
+                        <button id="profileBtn" className="profile-btn" aria-label="User Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </button>
+                    </div>
+                </header>
 
-            <div className="search-section">
-                <div className="search-bar-container">
-                    <Search size={20} className="search-icon" />
-                    <input
-                        type="text"
-                        className="search-input"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Search destinations..."
-                    />
-                    <Camera size={20} className="camera-icon" />
-                </div>
+                {/* Search */}
+                <section className="search-section">
+                    <div className="search-bar-container">
+                        <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        <input
+                            type="text"
+                            placeholder="Search destinations..."
+                            className="search-input"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                </section>
+
+                {/* Category Filters */}
+                <section className="content-section" style={{ marginBottom: '20px' }}>
+                    <div className="scroll-container horizontal-scroll no-scrollbar" style={{ padding: '5px 0 15px' }}>
+                        {categories.map(cat => (
+                            <div
+                                key={cat}
+                                className={`cat-card ${cat} ${currentCat === cat ? 'active' : ''}`}
+                                style={{
+                                    cursor: 'pointer',
+                                    padding: '8px 20px',
+                                    fontSize: '14px',
+                                    border: currentCat === cat ? '2px solid var(--text-main)' : undefined
+                                }}
+                                onClick={() => setCurrentCat(cat)}
+                            >
+                                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Destinations Grid */}
+                <main className="content-section">
+                    <h2 style={{ marginBottom: '20px', fontSize: '24px' }}>{pageTitle}</h2>
+                    <div className="destinations-grid">
+                        {filtered.length === 0 ? (
+                            <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px', color: 'var(--text-light)' }}>
+                                No destinations found matching your criteria.
+                            </p>
+                        ) : (
+                            filtered.map(dest => (
+                                <Link to={`/details.html?id=${dest.id}`} className="dest-card" key={dest.id}>
+                                    <div className="dest-img-box" style={{ backgroundImage: `url('${dest.image}')` }}></div>
+                                    <div className="dest-info">
+                                        <h3>{dest.name}</h3>
+                                        <p>{dest.description}</p>
+                                        <div className="rating">⭐⭐⭐⭐⭐ {dest.rating}</div>
+                                    </div>
+                                </Link>
+                            ))
+                        )}
+                    </div>
+                </main>
+
+                <footer className="bottom-spacer"></footer>
             </div>
 
-            <main className="destinations-list">
-                {filteredDestinations.map(dest => (
-                    <DestinationCard
-                        key={dest.id}
-                        {...dest}
-                    />
-                ))}
-            </main>
-        </div>
+            <style>{`
+                .destinations-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    gap: 20px;
+                    padding: 20px 0;
+                }
+                @media (min-width: 900px) {
+                    .destinations-grid {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                }
+            `}</style>
+        </>
     );
-}
+};
 
 export default Explore;

@@ -1,4 +1,4 @@
-const destinationsData = [
+window.destinationsData = [
     // Chennai
     {
         id: 'ch1',
@@ -7,7 +7,7 @@ const destinationsData = [
         category: 'beaches',
         description: 'The second longest urban beach in the world.',
         about: 'Marina Beach is a natural urban beach in Chennai, Tamil Nadu, India, along the Bay of Bengal. The beach runs from near Fort St. George in the north to Foreshore Estate in the south, a distance of 6.0 km (3.7 mi), making it the second longest urban beach in the world.',
-        image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74030?auto=format&fit=crop&w=400&q=80',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Marina_Beach%2C_Chennai.jpg/800px-Marina_Beach%2C_Chennai.jpg',
         gallery: [
             'https://images.unsplash.com/photo-1582510003544-4d00b7f74030?auto=format&fit=crop&w=800&q=80',
             'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=800&q=80',
