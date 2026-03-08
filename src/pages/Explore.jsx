@@ -65,7 +65,7 @@ const Explore = () => {
                 {/* Header */}
                 <header className="main-header">
                     <div className="header-left">
-                        <Link to="/home.html" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/home" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
                             <div className="logo-container">
                                 <img src={logoImg} alt="Tamil Ulagam Logo" className="main-logo"
                                     onError={(e) => { e.target.src = 'https://via.placeholder.com/40?text=Logo'; }} />
@@ -141,7 +141,7 @@ const Explore = () => {
                             </p>
                         ) : (
                             filtered.map(dest => (
-                                <Link to={`/details.html?id=${dest.id}`} className="dest-card" key={dest.id}>
+                                <Link to={`/details?id=${dest.id}`} className="dest-card" key={dest.id}>
                                     <div className="dest-img-box" style={{ backgroundImage: `url('${dest.image}')` }}></div>
                                     <div className="dest-info">
                                         <h3>{dest.name}</h3>

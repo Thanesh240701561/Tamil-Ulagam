@@ -14,7 +14,7 @@ const ProfileFavorites = () => {
     return (
         <div className="app-container">
             <header className="profile-page-header">
-                <Link to="/home.html" className="back-link">
+                <Link to="/home" className="back-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -30,7 +30,7 @@ const ProfileFavorites = () => {
                     {favorites.length === 0 ? (
                         <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-light)' }}>
                             <p>No favorites yet. Start exploring!</p>
-                            <Link to="/explore.html" className="btn-view" style={{ marginTop: '20px', display: 'inline-block' }}>Explore Places</Link>
+                            <Link to="/explore" className="btn-view" style={{ marginTop: '20px', display: 'inline-block' }}>Explore Places</Link>
                         </div>
                     ) : (
                         favorites.map(fav => (
@@ -50,7 +50,7 @@ const ProfileFavorites = () => {
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                                             </svg>
                                         </button>
-                                        <Link to={`/details.html?id=${fav.id}`} className="btn-view">View Detail</Link>
+                                        <Link to={`/details?id=${fav.id}`} className="btn-view">View Detail</Link>
                                     </div>
                                 </div>
                             </div>

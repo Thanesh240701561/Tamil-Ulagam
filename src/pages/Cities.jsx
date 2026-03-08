@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
+import { getCityDesc } from '../utils/cityDescriptions';
 
 const Cities = () => {
     const navigate = useNavigate();
@@ -28,28 +29,9 @@ const Cities = () => {
             }
         });
 
-        const cityDescriptions = {
-            'Chennai': 'Gateway to South India',
-            'Madurai': 'The Ancient City of Temples',
-            'Coimbatore': 'Manchester of South India',
-            'Tirunelveli': 'The Halwa City of South India',
-            'Nilgiris': 'The Enchanting Blue Mountains',
-            'Dindigul': 'The City of Locks and Biryani',
-            'Kanyakumari': 'The Land\'s End of India',
-            'Thanjavur': 'The Rice Bowl of Tamil Nadu',
-            'Trichy': 'The Historic Rockfort City',
-            'Tiruchirappalli': 'The Historic Rockfort City',
-            'Salem': 'The Steel and Mango City',
-            'Erode': 'The Turmeric City of India',
-            'Chengalpattu': 'Gateway to Coastal Heritage',
-            'Rameswaram': 'Island of Divine Peace',
-            'Ooty': 'Queen of Hill Stations',
-            'Kodaikanal': 'Princess of Hill Stations'
-        };
-
         return Array.from(cityMap.values()).map(city => ({
             ...city,
-            desc: cityDescriptions[city.name] || `${city.name} - ${city.count} Destinations`,
+            desc: getCityDesc(city.name),
             cats: Array.from(city.cats).slice(0, 4)
         })).sort((a, b) => b.count - a.count);
     }, [destinationsData]);
@@ -78,7 +60,7 @@ const Cities = () => {
                 {/* Header */}
                 <header className="main-header">
                     <div className="header-left">
-                        <Link to="/home.html" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/home" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', color: 'inherit' }}>
                             <div className="logo-container">
                                 <img src={logoImg} alt="Tamil Ulagam Logo" className="main-logo"
                                     onError={(e) => { e.target.src = 'https://via.placeholder.com/40?text=Logo'; }} />
@@ -87,7 +69,7 @@ const Cities = () => {
                         </Link>
                     </div>
                     <div className="header-right">
-                        <Link to="/home.html" className="map-link-btn" aria-label="Go Home">
+                        <Link to="/home" className="map-link-btn" aria-label="Go Home">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -124,7 +106,7 @@ const Cities = () => {
                     </div>
                     <div className="scroll-container horizontal-scroll no-scrollbar">
                         {allCategories.map(cat => (
-                            <Link key={cat} to={`/explore.html?cat=${cat}`} className={`cat-card ${cat}`}>
+                            <Link key={cat} to={`/explore?cat=${cat}`} className={`cat-card ${cat}`}>
                                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
                             </Link>
                         ))}
@@ -140,17 +122,17 @@ const Cities = () => {
                             </p>
                         ) : (
                             filteredCities.map(city => (
-                                <div className="city-card-wide" key={city.slug} onClick={() => navigate(`/explore.html?city=${city.slug}`)} style={{ cursor: 'pointer' }}>
+                                <div className="city-card-wide" key={city.slug} onClick={() => navigate(`/explore?city=${city.slug}`)} style={{ cursor: 'pointer' }}>
                                     <div className="city-main-info">
-                                        <Link to={`/explore.html?city=${city.slug}`} className="city-text" onClick={e => e.stopPropagation()}>
+                                        <Link to={`/explore?city=${city.slug}`} className="city-text" onClick={e => e.stopPropagation()}>
                                             <h3>{city.name}</h3>
                                             <p>{city.desc}</p>
                                         </Link>
-                                        <Link to={`/explore.html?city=${city.slug}`} className="city-view-btn" onClick={e => e.stopPropagation()}>View All</Link>
+                                        <Link to={`/explore?city=${city.slug}`} className="city-view-btn" onClick={e => e.stopPropagation()}>View All</Link>
                                     </div>
                                     <div className="famous-places-list">
                                         {city.cats.map(cat => (
-                                            <Link key={cat} to={`/explore.html?city=${city.slug}&cat=${cat.toLowerCase()}`} className="place-tag" onClick={e => e.stopPropagation()}>
+                                            <Link key={cat} to={`/explore?city=${city.slug}&cat=${cat.toLowerCase()}`} className="place-tag" onClick={e => e.stopPropagation()}>
                                                 {cat}
                                             </Link>
                                         ))}

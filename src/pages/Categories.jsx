@@ -9,7 +9,7 @@ const Categories = () => {
 
                 <header className="main-header">
                     <div className="header-left">
-                        <Link to="/home.html" className="logo-link"
+                        <Link to="/home" className="logo-link"
                             style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;">
                             <div className="logo-container">
                                 <img src="./src/assets/logo.png" alt="Tamil Ulagam Logo" className="main-logo"
@@ -52,27 +52,27 @@ const Categories = () => {
 
                 <main className="content-section">
                     <div className="categories-grid">
-                        <Link to="/explore.html?cat=waterfalls" className="cat-large-card"
+                        <Link to="/explore?cat=waterfalls" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1433086390636-524ee3c004d6?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Waterfalls</div>
                         </Link>
-                        <Link to="/explore.html?cat=mountains" className="cat-large-card"
+                        <Link to="/explore?cat=mountains" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Mountains</div>
                         </Link>
-                        <Link to="/explore.html?cat=islands" className="cat-large-card"
+                        <Link to="/explore?cat=islands" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Islands</div>
                         </Link>
-                        <Link to="/explore.html?cat=beaches" className="cat-large-card"
+                        <Link to="/explore?cat=beaches" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Beaches</div>
                         </Link>
-                        <Link to="/explore.html?cat=temples" className="cat-large-card"
+                        <Link to="/explore?cat=temples" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1512100356132-d4263b6589a2?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Temples</div>
                         </Link>
-                        <Link to="/explore.html?cat=forests" className="cat-large-card"
+                        <Link to="/explore?cat=forests" className="cat-large-card"
                             style={{ backgroundImage: `url(https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80)` }}>
                             <div className="cat-overlay">Forests</div>
                         </Link>

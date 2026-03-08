@@ -11,7 +11,7 @@ const ProfileHistory = () => {
     return (
         <div className="app-container">
             <header className="profile-page-header">
-                <Link to="/home.html" className="back-link">
+                <Link to="/home" className="back-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>

@@ -10,6 +10,10 @@ const Details = () => {
     const destinationsData = window.destinationsData || [];
     const place = useMemo(() => destinationsData.find(d => d.id === id), [id, destinationsData]);
 
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [id]);
+
     if (!place) {
         return (
             <div className="details-container">
@@ -46,7 +50,13 @@ const Details = () => {
                 </header>
 
                 <div className="hero-section" onClick={() => setShowModal(true)}>
-                    <img src={place.image} alt={place.name} className="hero-img" />
+                    <img
+                        src={place.image}
+                        alt={place.name}
+                        className="hero-img"
+                        onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1596489392263-ce2ff40994f1?auto=format&fit=crop&w=800&q=80'; }}
+                        style={{}}
+                    />
                 </div>
 
                 <div className="content-padding">
@@ -63,6 +73,28 @@ const Details = () => {
                     <div className="about-section">
                         <h2 className="section-title">About</h2>
                         <p className="about-text">{place.about || place.description}</p>
+                    </div>
+
+                    <div className="spotlight-section">
+                        <div className="section-header">
+                            <h2 className="section-title">What's Special?</h2>
+                        </div>
+                        <div className="spotlight-scroll horizontal-scroll no-scrollbar">
+                            {(place.spotlights || [
+                                { title: `${place.name} Highlight`, text: place.spotlight || `Experience the unique charm and ${place.category} atmosphere that makes ${place.name} a top-rated spot in ${place.city}.`, icon: "✨" },
+                                { title: "Visitor Favorite", text: `Famous for its scenic views and cultural significance in the ${place.city} region.`, icon: "🏆" },
+                                { title: "Expert Tip", text: "Best visited during the golden hour for breathtaking photography and a serene atmosphere.", icon: "📸" }
+                            ]).map((spot, idx) => (
+                                <div className="spotlight-portrait-card" key={idx}>
+                                    <div className="spotlight-icon-box">{spot.icon || "✨"}</div>
+                                    <div className="spotlight-portrait-info">
+                                        <h4>{spot.title}</h4>
+                                        <p>{spot.text}</p>
+                                    </div>
+                                    <div className="spotlight-portrait-tag">SPOTLIGHT</div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="map-link-section">

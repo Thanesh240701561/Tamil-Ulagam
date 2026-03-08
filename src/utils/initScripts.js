@@ -1,5 +1,5 @@
 export const initGlobalScripts = () => {
-    // We already have destinationsData loaded globally from index.html
+    // We already have destinationsData loaded globally from index
 
     // 1️⃣ Global Search Functionality with Event Delegation
     document.addEventListener('input', (e) => {
@@ -28,7 +28,7 @@ export const initGlobalScripts = () => {
                         resultsContainer.style.display = 'block';
                         matches.slice(0, 5).forEach(match => {
                             const div = document.createElement('a');
-                            div.href = `/details.html?id=${match.id}`;
+                            div.href = `/details?id=${match.id}`;
                             div.className = 'search-result-item';
                             div.innerHTML = `
                                 <img src="${match.image}" alt="${match.name}" onerror="this.src='https://via.placeholder.com/50?text=Place'">
@@ -86,7 +86,7 @@ export const initGlobalScripts = () => {
     document.addEventListener('keydown', (e) => {
         if (e.target && e.target.classList.contains('search-input')) {
             if (e.key === 'Enter' && e.target.value.trim() !== '') {
-                window.location.href = `/explore.html?q=${encodeURIComponent(e.target.value.trim())}`;
+                window.location.href = `/explore?q=${encodeURIComponent(e.target.value.trim())}`;
             }
         }
     });
@@ -147,14 +147,14 @@ export const initGlobalScripts = () => {
                         <div class="profile-menu">
                             <div class="menu-group">
                                 <h3>Account Settings</h3>
-                                <a href="/profile-info.html" class="menu-item" style="text-decoration: none;"><span>Personal Information</span></a>
-                                <a href="/profile-favorites.html" class="menu-item" style="text-decoration: none;"><span>My Favorites</span></a>
-                                <a href="/profile-history.html" class="menu-item" style="text-decoration: none;"><span>Travel History</span></a>
+                                <a href="/profile-info" class="menu-item" style="text-decoration: none;"><span>Personal Information</span></a>
+                                <a href="/profile-favorites" class="menu-item" style="text-decoration: none;"><span>My Favorites</span></a>
+                                <a href="/profile-history" class="menu-item" style="text-decoration: none;"><span>Travel History</span></a>
                             </div>
                             <div class="menu-group">
                                 <h3>Preferences</h3>
-                                <a href="/profile-notifications.html" class="menu-item" style="text-decoration: none;"><span>Notifications</span></a>
-                                <a href="/profile-settings.html" class="menu-item" style="text-decoration: none;"><span>Global Settings</span></a>
+                                <a href="/profile-notifications" class="menu-item" style="text-decoration: none;"><span>Notifications</span></a>
+                                <a href="/profile-settings" class="menu-item" style="text-decoration: none;"><span>Global Settings</span></a>
                             </div>
                         </div>
                         <a href="/" class="logout-btn-real"><span>Logout</span></a>

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoImg from '../assets/logo.png';
+import { getCityDesc } from '../utils/cityDescriptions';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -27,28 +28,9 @@ const Home = () => {
             }
         });
 
-        const cityDescriptions = {
-            'Chennai': 'Gateway to South India',
-            'Madurai': 'The Ancient City of Temples',
-            'Coimbatore': 'Manchester of South India',
-            'Tirunelveli': 'The Halwa City of South India',
-            'Nilgiris': 'The Enchanting Blue Mountains',
-            'Dindigul': 'The City of Locks and Biryani',
-            'Kanyakumari': 'The Land\'s End of India',
-            'Thanjavur': 'The Rice Bowl of Tamil Nadu',
-            'Trichy': 'The Historic Rockfort City',
-            'Tiruchirappalli': 'The Historic Rockfort City',
-            'Salem': 'The Steel and Mango City',
-            'Erode': 'The Turmeric City of India',
-            'Chengalpattu': 'Gateway to Coastal Heritage',
-            'Rameswaram': 'Island of Divine Peace',
-            'Ooty': 'Queen of Hill Stations',
-            'Kodaikanal': 'Princess of Hill Stations'
-        };
-
         return Array.from(cityMap.values()).map(city => ({
             ...city,
-            desc: cityDescriptions[city.name] || `${city.name} - ${city.count} Destinations`,
+            desc: getCityDesc(city.name),
             cats: Array.from(city.cats).slice(0, 4)
         })).sort((a, b) => b.count - a.count);
     }, [destinationsData]);
@@ -62,7 +44,7 @@ const Home = () => {
     }, [destinationsData]);
 
     const handleCityCardClick = (slug) => {
-        navigate(`/explore.html?city=${slug}`);
+        navigate(`/explore?city=${slug}`);
     };
 
     return (
@@ -78,6 +60,16 @@ const Home = () => {
                         <h1 className="brand-name">Tamil Ulagam</h1>
                     </div>
                     <div className="header-right">
+                        <div className="nearby-header-btn coming-soon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="3" />
+                                <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                            <span>Nearby Attraction</span>
+                            <span className="badge">Soon</span>
+                        </div>
                         <a href="#" className="map-link-btn" aria-label="Open Map">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -121,7 +113,7 @@ const Home = () => {
                         </div>
                         <span>Transport</span>
                     </a>
-                    <a href="#" className="nav-card">
+                    <Link to="/stay" className="nav-card">
                         <div className="icon-box stay-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -132,7 +124,8 @@ const Home = () => {
                             </svg>
                         </div>
                         <span>Stay</span>
-                    </a>
+                    </Link>
+
                     <a href="#" className="nav-card">
                         <div className="icon-box itinerary-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -157,21 +150,21 @@ const Home = () => {
                 <section className="content-section">
                     <div className="section-header">
                         <h2>Popular Cities</h2>
-                        <Link to="/cities.html" className="view-all-btn">View All &gt;</Link>
+                        <Link to="/cities" className="view-all-btn">View All &gt;</Link>
                     </div>
                     <div className="cities-grid">
                         {cities.map(city => (
                             <div className="city-card-wide" key={city.slug} onClick={() => handleCityCardClick(city.slug)} style={{ cursor: 'pointer' }}>
                                 <div className="city-main-info">
-                                    <Link to={`/explore.html?city=${city.slug}`} className="city-text" onClick={e => e.stopPropagation()}>
+                                    <Link to={`/explore?city=${city.slug}`} className="city-text" onClick={e => e.stopPropagation()}>
                                         <h3>{city.name}</h3>
                                         <p>{city.desc}</p>
                                     </Link>
-                                    <Link to={`/explore.html?city=${city.slug}`} className="city-view-btn" onClick={e => e.stopPropagation()}>View All</Link>
+                                    <Link to={`/explore?city=${city.slug}`} className="city-view-btn" onClick={e => e.stopPropagation()}>View All</Link>
                                 </div>
                                 <div className="famous-places-list">
                                     {city.cats.map(cat => (
-                                        <Link key={cat} to={`/explore.html?city=${city.slug}&cat=${cat.toLowerCase()}`} className="place-tag" onClick={e => e.stopPropagation()}>{cat}</Link>
+                                        <Link key={cat} to={`/explore?city=${city.slug}&cat=${cat.toLowerCase()}`} className="place-tag" onClick={e => e.stopPropagation()}>{cat}</Link>
                                     ))}
                                 </div>
                             </div>
@@ -183,11 +176,11 @@ const Home = () => {
                 <section className="content-section">
                     <div className="section-header">
                         <h2>Featured Destinations</h2>
-                        <Link to="/explore.html" className="view-all-btn">View All &gt;</Link>
+                        <Link to="/explore" className="view-all-btn">View All &gt;</Link>
                     </div>
                     <div className="scroll-container horizontal-scroll no-scrollbar">
                         {featured.map((dest) => (
-                            <Link to={`/details.html?id=${dest.id}`} className="dest-card" key={dest.id}>
+                            <Link to={`/details?id=${dest.id}`} className="dest-card" key={dest.id}>
                                 <div className="dest-img-box" style={{ backgroundImage: `url(${dest.image})` }}></div>
                                 <div className="dest-info">
                                     <h3>{dest.name}</h3>
